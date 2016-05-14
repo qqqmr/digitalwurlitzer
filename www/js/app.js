@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic', 'wurlitzer.controllers', 'Mocks'])
+angular.module('starter', ['ionic', 'wurlitzer.controllers', 'ngMockE2E'])
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
@@ -21,3 +21,48 @@ angular.module('starter', ['ionic', 'wurlitzer.controllers', 'Mocks'])
     }
   });
 })
+
+    .config(function($stateProvider, $urlRouterProvider) {
+
+      $stateProvider
+
+          .state('main-menu', {
+            url: '/main-menu',
+            templateUrl: '/templates/main-menu.html',
+            controller: 'MainMenuController'
+          })
+
+          .state('bar-info', {
+            url: '/bar-info',
+            templateUrl: '/templates/bar-info.html',
+            controller: 'BarInfoController'
+          })
+
+          .state('vote-songs', {
+            url: '/vote-songs',
+            templateUrl: '/templates/vote-songs.html',
+            controller: 'VoteSongsController'
+          })
+
+          .state('find-bars', {
+            url: '/find-bars',
+            templateUrl: '/templates/find-bars.html',
+            controller: 'FindBarsController'
+          })
+
+          .state('current-playlist', {
+            url: '/current-playlist',
+            templateUrl: '/templates/current-playlist.html',
+            controller: 'PlaylistController'
+          });
+
+      // if none of the above states are matched, use this as the fallback
+      $urlRouterProvider.otherwise('/main-menu');
+
+    })
+
+    .controller('NavBarController', function($scope, $ionicHistory) {
+      $scope.goBack = function() {
+        $ionicHistory.goBack();
+      };
+    });

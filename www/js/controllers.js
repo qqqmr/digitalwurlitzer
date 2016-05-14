@@ -16,11 +16,6 @@ angular.module('wurlitzer.controllers', [])
         };
     })
 
-    .controller('PlaylistController', function($scope, $ionicHistory) {
-
-
-    })
-
     .controller('VoteSongsController', function($scope, $ionicHistory) {
 
     })
@@ -30,8 +25,13 @@ angular.module('wurlitzer.controllers', [])
 
     })
 
-    .controller('FindBarsController', function($scope, $ionicHistory) {
+    .controller('FindBarsController', function($scope, $ionicHistory, SelectionCache) {
      
+        // TODO::
+        // !! when the user finally did choose a bar, or better: if he is finally logged into that bar
+        // set the following line - 
+        
+        SelectionCache.setActiveBar(bar);
 
     });
 
