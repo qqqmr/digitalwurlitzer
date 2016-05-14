@@ -1,8 +1,14 @@
-<ion-view view-title="Country Playlist">
+<ion-view view-title="Playlist {{currentPlaylist.name}}">
   <ion-content class="padding">
+    Vergangen:
+    <div ng-repeat="song in currentPlaylist.history">
+      {{song.artist}}::{{song.title}}
+    </div>
 
-    <h2>Current Playlist</h2>
-
+    Ausstehend:
+    <div ng-repeat="song in currentPlaylist.future">
+      {{song.artist}}::{{song.title}}
+    </div>
 
   </ion-content>
 </ion-view>

@@ -58,11 +58,18 @@ angular.module('starter', ['ionic', 'wurlitzer.controllers', 'ngMockE2E'])
 
       // if none of the above states are matched, use this as the fallback
       $urlRouterProvider.otherwise('/main-menu');
-
     })
 
-    .controller('NavBarController', function($scope, $ionicHistory) {
+    .controller('NavBarController', function($scope, $ionicHistory, GlobalBarsApi, SelectionCache) {
       $scope.goBack = function() {
         $ionicHistory.goBack();
       };
+        
+        //TODO: this is just an initial setting - this needs to be set by the user in the application
+        // this is here just for debugging purposes - you dont have to set user and bar at app start.
+        GlobalBarsApi.getAllBars().then(function(res){
+            SelectionCache.setActiveBar(res.data[0]);
+        })
+
+
     });
