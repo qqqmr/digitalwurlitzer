@@ -1,7 +1,20 @@
-<ion-view view-title="Country Playlist">
+<ion-view view-title="Find Bars">
     <ion-content class="padding">
 
-        <h2>Find Bars</h2>
+
+        <!--TODO search location/bar to center map on-->
+        <label class="item item-input">
+            <i class="icon ion-search placeholder-icon"></i>
+            <form ng-submit="searchCity()">
+                <!--<input type="search" ng-model="searchInput" placeholder="{{cityname}}" autocorrect="off"><!-- ng-model="cityname" ><!--ng-change="search()"-->
+                <!--not displayed, notwendig für ng-submit-->
+                <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;"/>
+            </form>
+        </label>
+
+
+        <div id="map" data-tap-disabled="true"></div>
+
 
 
     </ion-content>

@@ -40,15 +40,86 @@ angular.module('wurlitzer.controllers', [])
 
     })
 
-    .controller('FindBarsController', function($scope, $ionicHistory, SelectionCache) {
+    .controller('FindBarsController', function($scope, $ionicHistory, GlobalBarsApi, SelectionCache, $ionicLoading, $compile) {
+
+        //alert(SelectionCache.getActiveBar().name);
+
+        function initialize()
+        {
+            var centerLatlng = new google.maps.LatLng(48.209206,16.372778); // default location = vienna
+            //TODO center map on current active Bar
+            navigator.geolocation.getCurrentPosition(function(pos) {
+                $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+            }, function(error) {
+                console.log('Unable to get location: ' + error.message);
+            });
+
+            var mapOptions = {
+                center: centerLatlng,
+                zoom: 16,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var map = new google.maps.Map(document.getElementById("map"),
+                mapOptions);
+
+            var infowindow = new google.maps.InfoWindow({
+                content: "comming.."
+            });
+
+            // Set Marker for each Bar
+            GlobalBarsApi.getAllBars().then(function(res){
+                for(var i in res.data)
+                {
+                    var marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(res.data[i].latidude, res.data[i].longitude),
+                        map: map,
+                        title: res.data[i].name
+                    });
+
+                    var contentString = "<div>"+res.data[i].name+"<br/><a ng-click='clickCheckIn()'>Check in!</a> </div>";
+                    //var compiled = $compile(contentString)($scope);
+                    bindInfoWindow(marker, map, infowindow, contentString);
+
+                }
+
+
+                //Binds Info Pop Up Windows to Markers
+                //Thanks to http://stackoverflow.com/a/16606414
+                function bindInfoWindow(marker, map, infowindow, contentString) {
+                    marker.addListener('click', function() {
+                        var compiled = $compile(contentString)($scope);
+                        infowindow.setContent(compiled[0]);
+                        infowindow.open(map, this);
+                    });
+                }
+
+            });
+
+            //Bind Map
+            $scope.map = map;
+        }
+
+
+        initialize();
+
+        $scope.clickCheckIn = function() {
+            //TODO set active bar
+            //SelectionCache.setActiveBar()
+
+
+            //TODO better user feedback
+            alert('Youre now checked in');
+        };
+
+
         // TODO::
         // !! when the user finally did choose a bar, or better: if he is finally logged into that bar
         // set SelectionCache.setActiveBar(bar) and SelectionCache.setActiveUser(user)
         // this happens already in the NavBarController. delete it there if this block here
         // is a valid selection of a bar (not a hardcoded data[0])
-        GlobalBarsApi.getAllBars().then(function(res){
+        /*GlobalBarsApi.getAllBars().then(function(res){
             SelectionCache.setActiveBar(res.data[0]);
-        })
+        })*/
     });
 
 
