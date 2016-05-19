@@ -34,8 +34,8 @@ app.factory('BackendData', function(){ return {
                 "to": "04:00"
             }
         },
-        "latidude": "48,2364",
-        "longitude": "16,3914",
+        "latidude": "48.2364",
+        "longitude": "16.3914",
         "id": 0,
         "playlists": [
             {
@@ -70,8 +70,8 @@ app.factory('BackendData', function(){ return {
                 "username": "irishbub2user2",
                 "password": "test1"
             }],
-        "latidude": "48,2380",
-        "longitude": "16,3499",
+        "latidude": "48.2380",
+        "longitude": "16.3499",
         "open": {
             "monday": {
                 "from": "17:00",
@@ -88,8 +88,8 @@ app.factory('BackendData', function(){ return {
     }, {
         "name": "Irish Pub #3",
         /* additional bar props come here. specials, etc. */
-        "latidude": "48,2410",
-        "longitude": "16,3668",
+        "latidude": "48.2410",
+        "longitude": "16.3668",
         "open": {
             "monday": {
                 "from": "17:00",
