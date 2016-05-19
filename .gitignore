@@ -1,2 +1,4 @@
 platforms
 /bower_components
+*.DS_Store
+*.xml
