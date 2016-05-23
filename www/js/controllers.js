@@ -35,8 +35,17 @@ angular.module('wurlitzer.controllers', [])
         }
     })
 
-    .controller('BarInfoController', function($scope, $ionicHistory) {
-  
+    .controller('BarInfoController', function($scope, $ionicHistory, BarApi) {
+        
+        //TODO: set selection cache instead of hard coded id
+        BarApi.getBar(0).then(function(res){
+
+            console.log("res: ", res);
+            $scope.name = res.data.name;
+            $scope.events = res.data.info.events;
+            $scope.special_drinks = res.data.info.special_drinks;
+            $scope.openHours = res.data.info.open;
+        });
 
     })
 
