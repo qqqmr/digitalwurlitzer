@@ -14,6 +14,7 @@ app.run(function($httpBackend, BackendData, $log, $window) {
     });
 
     $httpBackend.whenGET(/^\/templates\//).passThrough();
+    $httpBackend.whenGET(/\.*(maps\.googleapis\.com).*/).passThrough(); //forward Google Api Requests
 
     // gets all contents of a bar object
     $httpBackend.whenGET(/bars\/\w+$/).respond(function (method, url) {
