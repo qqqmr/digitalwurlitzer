@@ -21,7 +21,7 @@ app.factory('BarApi', function($http, $log, SelectionCache) {
      * Log the user into the active Bar
      * @param username
      * @param password
-     * @returns {HttpPromise}
+     * @returns {HttpPromise} user
      * @private
      */
     function _login(username, password){

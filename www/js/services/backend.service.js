@@ -64,7 +64,15 @@ app.run(function($httpBackend, BackendData, $log, $window) {
         if(!result) return [404]
         return [200, result, {}];
     });
-    
+
+    $httpBackend.whenPOST(/bars\/\w+\/active/).respond(function(method, url, data) {
+
+    });
+
+    $httpBackend.whenPOST(/bars\/\w+\/active\/inc/).respond(function(method, url, data) {
+
+    });
+
     $httpBackend.whenGET(/song\/\w+$/).respond(function (method, url, data, headers, params) {
         var re = /.*\/song\/(\w+)/;
         var id = parseInt(url.replace(re, '$1'), 10);
