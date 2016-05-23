@@ -25,6 +25,11 @@ app.factory('BackendData', function(){ return {
         "info": {
             "open": [
                 {
+                    "day": "Montag",
+                    "from": "geschlossen",
+                    "to": "geschlossen"
+                },
+                {
                     "day": "Dienstag-Freitag",
                     "from": "16:00",
                     "to": "00:00"
@@ -33,11 +38,6 @@ app.factory('BackendData', function(){ return {
                     "day": "Samstag-Sonntag",
                     "from": "18:00",
                     "to": "04:00"
-                },
-                {
-                    "day": "Montag",
-                    "from": "geschlossen",
-                    "to": "geschlossen"
                 }
             ],
             "special_drinks": [
@@ -112,49 +112,49 @@ app.factory('BackendData', function(){ return {
         "info": {
             "open": [
                 {
-                    "day": "Dienstag-Freitag",
+                    "day": "Montag-Donnerstag",
+                    "from": "12:00",
+                    "to": "10:00"
+                },
+                {
+                    "day": "Freitag-Samstag",
                     "from": "16:00",
-                    "to": "00:00"
+                    "to": "03:00"
                 },
                 {
-                    "day": "Samstag-Sonntag",
-                    "from": "18:00",
-                    "to": "04:00"
-                },
-                {
-                    "day": "Montag",
+                    "day": "Sonntag",
                     "from": "geschlossen",
                     "to": "geschlossen"
                 }
             ],
             "special_drinks": [
                 {
-                    "name": "Gin Tonic",
-                    "price": 3.90
+                    "name": "Bacardi Cola",
+                    "price": 4.00
                 },
                 {
-                    "name": "Ottakringer Zwickl 0.5",
-                    "price": 2.60
+                    "name": "Jägermeister",
+                    "price": 1.80
                 },
                 {
-                    "name": "Tequilla Shot",
-                    "price": 1.50
+                    "name": "Averna Sauer",
+                    "price": 1.80
                 }
             ],
             "events": [
                 {
-                    "name": "Summer Opening",
-                    "band": "Orishas",
-                    "date": "15.05.2016",
-                    "from": "16:00",
-                    "to"  : "04:00"
+                    "name": "Musikfestival",
+                    "band": "Blasmusik Nikolsdorf",
+                    "date": "04.09.2016",
+                    "from": "12:00",
+                    "to"  : "23:00"
                 },
                 {
-                    "name": "Goa Party",
-                    "band": "Infected Mushroom",
-                    "date": "20.07.2016",
-                    "from": "12:00",
-                    "to"  : "06:00"
+                    "name": "Feuerwehrfeier",
+                    "band": "Seiler & Speer",
+                    "date": "11.11.2016",
+                    "from": "14:00",
+                    "to"  : "02:00"
                 }
             ]
         },
@@ -167,29 +167,29 @@ app.factory('BackendData', function(){ return {
         "info": {
             "open": [
                 {
+                    "day": "Montag",
+                    "from": "15:00",
+                    "to": "23:00"
+                },
+                {
                     "day": "Dienstag-Freitag",
-                    "from": "16:00",
-                    "to": "00:00"
+                    "from": "17:00",
+                    "to": "01:00"
                 },
                 {
                     "day": "Samstag-Sonntag",
                     "from": "18:00",
-                    "to": "04:00"
-                },
-                {
-                    "day": "Montag",
-                    "from": "geschlossen",
-                    "to": "geschlossen"
+                    "to": "05:00"
                 }
             ],
             "special_drinks": [
                 {
-                    "name": "Gin Tonic",
-                    "price": 3.90
+                    "name": "Long Island Ice Tea",
+                    "price": 5.50
                 },
                 {
-                    "name": "Ottakringer Zwickl 0.5",
-                    "price": 2.60
+                    "name": "Captain Cola",
+                    "price": 4.60
                 },
                 {
                     "name": "Tequilla Shot",
@@ -198,18 +198,18 @@ app.factory('BackendData', function(){ return {
             ],
             "events": [
                 {
-                    "name": "Summer Opening",
-                    "band": "Orishas",
-                    "date": "15.05.2016",
-                    "from": "16:00",
-                    "to"  : "04:00"
+                    "name": "Krampusfest",
+                    "band": "Manowar",
+                    "date": "04.12.2016",
+                    "from": "17:00",
+                    "to"  : "03:00"
                 },
                 {
-                    "name": "Goa Party",
-                    "band": "Infected Mushroom",
-                    "date": "20.07.2016",
-                    "from": "12:00",
-                    "to"  : "06:00"
+                    "name": "Neujahrsfest",
+                    "band": "Die Toten Hosen",
+                    "date": "01.01.2017",
+                    "from": "13:00",
+                    "to"  : "20:00"
                 }
             ]
         },
