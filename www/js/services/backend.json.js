@@ -22,17 +22,54 @@ app.factory('BackendData', function(){ return {
                 "username": "test2",
                 "password": "test2"
             }],
-        "open": {
-            "monday": {
-                "from": "17:00",
-                "to": "24:00" },
-            "tuesday": {
-                "from": "20:00",
-                "to": "03:00" },
-            "wednesday": {
-                "from": "20:00",
-                "to": "04:00"
-            }
+        "info": {
+            "open": [
+                {
+                    "day": "Dienstag-Freitag",
+                    "from": "16:00",
+                    "to": "00:00"
+                },
+                {
+                    "day": "Samstag-Sonntag",
+                    "from": "18:00",
+                    "to": "04:00"
+                },
+                {
+                    "day": "Montag",
+                    "from": "geschlossen",
+                    "to": "geschlossen"
+                }
+            ],
+            "special_drinks": [
+                {
+                    "name": "Gin Tonic",
+                    "price": 3.90
+                },
+                {
+                    "name": "Ottakringer Zwickl 0.5",
+                    "price": 2.60
+                },
+                {
+                    "name": "Tequilla Shot",
+                    "price": 1.50
+                }
+            ],
+            "events": [
+                {
+                    "name": "Summer Opening",
+                    "band": "Orishas",
+                    "date": "15.05.2016",
+                    "from": "16:00",
+                    "to"  : "04:00"
+                },
+                {
+                    "name": "Goa Party",
+                    "band": "Infected Mushroom",
+                    "date": "20.07.2016",
+                    "from": "12:00",
+                    "to"  : "06:00"
+                }
+            ]
         },
         "latidude": "48.2364",
         "longitude": "16.3914",
@@ -72,17 +109,54 @@ app.factory('BackendData', function(){ return {
             }],
         "latidude": "48.2380",
         "longitude": "16.3499",
-        "open": {
-            "monday": {
-                "from": "17:00",
-                "to": "24:00" },
-            "tuesday": {
-                "from": "20:00",
-                "to": "03:00" },
-            "wednesday": {
-                "from": "20:00",
-                "to": "04:00"
-            }
+        "info": {
+            "open": [
+                {
+                    "day": "Dienstag-Freitag",
+                    "from": "16:00",
+                    "to": "00:00"
+                },
+                {
+                    "day": "Samstag-Sonntag",
+                    "from": "18:00",
+                    "to": "04:00"
+                },
+                {
+                    "day": "Montag",
+                    "from": "geschlossen",
+                    "to": "geschlossen"
+                }
+            ],
+            "special_drinks": [
+                {
+                    "name": "Gin Tonic",
+                    "price": 3.90
+                },
+                {
+                    "name": "Ottakringer Zwickl 0.5",
+                    "price": 2.60
+                },
+                {
+                    "name": "Tequilla Shot",
+                    "price": 1.50
+                }
+            ],
+            "events": [
+                {
+                    "name": "Summer Opening",
+                    "band": "Orishas",
+                    "date": "15.05.2016",
+                    "from": "16:00",
+                    "to"  : "04:00"
+                },
+                {
+                    "name": "Goa Party",
+                    "band": "Infected Mushroom",
+                    "date": "20.07.2016",
+                    "from": "12:00",
+                    "to"  : "06:00"
+                }
+            ]
         },
         "id": 1
     }, {
@@ -90,17 +164,54 @@ app.factory('BackendData', function(){ return {
         /* additional bar props come here. specials, etc. */
         "latidude": "48.2410",
         "longitude": "16.3668",
-        "open": {
-            "monday": {
-                "from": "17:00",
-                "to": "24:00" },
-            "tuesday": {
-                "from": "20:00",
-                "to": "03:00" },
-            "wednesday": {
-                "from": "20:00",
-                "to": "04:00"
-            }
+        "info": {
+            "open": [
+                {
+                    "day": "Dienstag-Freitag",
+                    "from": "16:00",
+                    "to": "00:00"
+                },
+                {
+                    "day": "Samstag-Sonntag",
+                    "from": "18:00",
+                    "to": "04:00"
+                },
+                {
+                    "day": "Montag",
+                    "from": "geschlossen",
+                    "to": "geschlossen"
+                }
+            ],
+            "special_drinks": [
+                {
+                    "name": "Gin Tonic",
+                    "price": 3.90
+                },
+                {
+                    "name": "Ottakringer Zwickl 0.5",
+                    "price": 2.60
+                },
+                {
+                    "name": "Tequilla Shot",
+                    "price": 1.50
+                }
+            ],
+            "events": [
+                {
+                    "name": "Summer Opening",
+                    "band": "Orishas",
+                    "date": "15.05.2016",
+                    "from": "16:00",
+                    "to"  : "04:00"
+                },
+                {
+                    "name": "Goa Party",
+                    "band": "Infected Mushroom",
+                    "date": "20.07.2016",
+                    "from": "12:00",
+                    "to"  : "06:00"
+                }
+            ]
         },
         "id": 2
     }],
