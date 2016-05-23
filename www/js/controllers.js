@@ -47,9 +47,11 @@ angular.module('wurlitzer.controllers', [])
         function initialize()
         {
             var centerLatlng = new google.maps.LatLng(48.209206,16.372778); // default location = vienna
+            centerLatlng = new google.maps.LatLng(48.2364, 16.3914); //TODO delete
             //TODO center map on current active Bar
             navigator.geolocation.getCurrentPosition(function(pos) {
                 $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+                $scope.map.setCenter(new google.maps.LatLng(48.2364, 16.3914)); //TODO delete
             }, function(error) {
                 console.log('Unable to get location: ' + error.message);
             });
@@ -75,11 +77,10 @@ angular.module('wurlitzer.controllers', [])
                         map: map,
                         title: res.data[i].name
                     });
+                    marker.id = res.data[i].id;
 
-                    var contentString = "<div>"+res.data[i].name+"<br/><a ng-click='clickCheckIn()'>Check in!</a> </div>";
-                    //var compiled = $compile(contentString)($scope);
+                    var contentString = "<div>"+res.data[i].name+"<br/><a ng-click='clickCheckIn("+res.data[i].id+")'>Check in!</a> </div>";
                     bindInfoWindow(marker, map, infowindow, contentString);
-
                 }
 
 
@@ -98,17 +99,25 @@ angular.module('wurlitzer.controllers', [])
             //Bind Map
             $scope.map = map;
         }
-
-
+        
         initialize();
 
-        $scope.clickCheckIn = function() {
-            //TODO set active bar
-            //SelectionCache.setActiveBar()
+        $scope.clickCheckIn = function(id) 
+        {
+            GlobalBarsApi.getAllBars().then(function (res) {
+                function getBarById(id) {
+                    return res.data.filter(
+                        function(res) {
+                            return res.id == id
+                        }
+                    );
+                }
+                SelectionCache.setActiveBar(getBarById(id)[0]);
+                return;
+            })
 
-
-            //TODO better user feedback
-            alert('Youre now checked in');
+            //Fehlerbehandlung
+            alert('Youre now checked in to'+id );
         };
 
 
