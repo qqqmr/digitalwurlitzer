@@ -21,7 +21,7 @@ angular.module('wurlitzer.controllers', [])
         var activePlaylist = null;
         var index = 0;
         var playlistLenght = 0;
-
+        
         BarApi.getActiveVotingList().then(function(res){
             activePlaylist = res.data.activeVoting.future;
             console.log("activePlaylist: ",activePlaylist);
@@ -78,6 +78,16 @@ angular.module('wurlitzer.controllers', [])
                 },  function err(res){
                     console.log("Wrong Password or Username!");
                 })
+        }
+        
+        $scope.increaseShuffle = function(){
+            BarApi.increaseShuffleVote().then(function success(res){
+                if(res.data === 0){
+                    //TODO: ALERTALERTALERT show the user that the playlist has changed.
+                    console.log("Playlist changed")
+                }
+                console.log(res.data);
+            })
         }
     })
 

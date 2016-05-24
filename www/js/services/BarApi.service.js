@@ -38,6 +38,16 @@ app.factory('BarApi', function($http, $log, SelectionCache) {
     }
 
     /**
+     * Increases the shuffle counter of the active playlist by 1
+     * If the counter > maxShuffleVotes, it will switch to another playlist
+     * Returns the current state of the counter (number)
+     * @returns {HttpPromise}
+     * @private
+     */
+    function _increaseVoteForShuffle() {
+        return $http.post(ENDPOINT + "/" + bar.id + "/active/inc")
+    }
+    /**
      * Make a vote for a song in the activeVote.future list
      * @param user the user who makes the vote
      * @param song the song to vote for
@@ -57,6 +67,7 @@ app.factory('BarApi', function($http, $log, SelectionCache) {
         'getBar': _getBar,
         'getActiveVotingList': _getActiveVotingList,
         'makeVoteFor': _makeVoteFor,
+        'increaseShuffleVote': _increaseVoteForShuffle,
         'login': _login
     }
 })

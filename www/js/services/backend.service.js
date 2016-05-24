@@ -66,12 +66,49 @@ app.run(function($httpBackend, BackendData, $log, $window) {
         return [200, result, {}];
     });
 
-    $httpBackend.whenPOST(/bars\/\w+\/active/).respond(function(method, url, data) {
-
-    });
-
     $httpBackend.whenPOST(/bars\/\w+\/active\/inc/).respond(function(method, url, data) {
+        var re = /.*\/bars\/(\w+)\/active\/inc/;
+        var id = parseInt(url.replace(re, '$1'), 10);
+        var Bar = _.find(BackendData.bars, function(o) { return o.id === id; });
+        if(!Bar) return [404]
+        Bar.shuffleCount++;
+        if(Bar.shuffleCount < Bar.shuffleCountMax) return [200, Bar.shuffleCount];
+        Bar.shuffleCount = 0;
+        
+        // now take the next playlist, join songs by id props and insert it to activeVoting
+        // with the first song into activeVoting.history and [0].currentSong = true
+        // and the rest into activeVoting.future
 
+        var newPlaylist = _.cloneDeep(_.find(Bar.playlists, function(o){ return o.id !== Bar.activeVoting.playlist}))
+        var newSongList = [];
+        _.forEach(newPlaylist.songs, function (o) {
+          var song = null;
+          _.every(BackendData.songs, function(s){
+              if(s.id === o) {
+                  song = s;
+                  return false;
+              }
+              return true;
+          });
+          song ? newSongList.push(song) : null;
+        })
+
+        if(newSongList.length === 0) return [500, "SERVER ERROR: Playlist got no songs!"]
+        
+        // prepare the new playlist object
+        Bar.activeVoting = newPlaylist;
+        Bar.activeVoting.playlist = Bar.activeVoting.id;
+        Bar.activeVoting.history = [];
+        Bar.activeVoting.future = [];
+        delete Bar.activeVoting.id;
+        delete Bar.activeVoting.songs;
+
+        Bar.activeVoting.history = _.take(newSongList);
+        Bar.activeVoting.history[0].currentSong = true;
+
+        Bar.activeVoting.future = _.tail(newSongList);
+
+        return [200, 0]; // return 0 means: PLAYLIST GOT SHUFFLED!
     });
 
     $httpBackend.whenGET(/song\/\w+$/).respond(function (method, url, data, headers, params) {

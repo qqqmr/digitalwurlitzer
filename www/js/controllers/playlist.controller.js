@@ -3,7 +3,7 @@ app = angular.module('starter')
     $scope.currentBar = SelectionCache.getActiveBar();
     $scope.currentPlaylist = null;
 
-    BarApi.getActiveVotingList(0).then(function success(response) {
+    BarApi.getActiveVotingList().then(function success(response) {
         $scope.currentPlaylist = response.data.activeVoting;
         $log.debug(response);
     }, function error(response) {
