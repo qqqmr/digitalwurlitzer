@@ -17,14 +17,60 @@ angular.module('wurlitzer.controllers', [])
     })
 
     .controller('VoteSongsController', function($scope, $ionicHistory, BarApi, SelectionCache) {
-        $scope.vote = function(){
+
+        var activePlaylist = null;
+        var index = 0;
+        var playlistLenght = 0;
+
+        BarApi.getActiveVotingList().then(function(res){
+            activePlaylist = res.data.activeVoting.future;
+            console.log("activePlaylist: ",activePlaylist);
+            playlistLenght = activePlaylist.length;
+            $scope.title = activePlaylist[index].title;
+            $scope.artist = activePlaylist[index].artist;
+        });
+
+        $scope.updateVotingSong = function () {
+            index++;
+            $scope.title = activePlaylist[index].title;
+            $scope.artist = activePlaylist[index].artist;
+        };
+        
+        $scope.showActiveBar = function() {
+
+        };
+
+        $scope.voteUp = function(){
+
+            console.log("index: ", index);
             // to vote for a song, do it this way:
             // active Bar is set, so we can log in to that bar.
             BarApi.login("test", "test").then(
                 function succ(res){
                     SelectionCache.setActiveUser(res.data)
-                    BarApi.makeVoteFor(SelectionCache.getActiveUser(), { id: 1, "someotherproperties": "xyz"} , 1001)
+                    BarApi.makeVoteFor(SelectionCache.getActiveUser(), { id: activePlaylist[index].id, "someotherproperties": "xyz"} , 10)
                         .then(function success(res){
+                            $scope.updateVotingSong();
+                            console.log(res);
+                        }, function err(res){
+                            console.log(res);
+                        })
+                },  function err(res){
+                    console.log("Wrong Password or Username!");
+                })
+        }
+
+        $scope.voteDown = function(){
+
+            console.log("index: ", index);
+            // to vote for a song, do it this way:
+            // active Bar is set, so we can log in to that bar.
+            BarApi.login("test", "test").then(
+                function succ(res){
+                    SelectionCache.setActiveUser(res.data)
+                    BarApi.makeVoteFor(SelectionCache.getActiveUser(), { id: activePlaylist[index].id, "someotherproperties": "xyz"} , -10)
+                        .then(function success(res){
+                            $scope.updateVotingSong();
                             console.log(res);
                         }, function err(res){
                             console.log(res);
