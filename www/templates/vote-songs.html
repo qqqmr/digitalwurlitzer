@@ -1,8 +1,18 @@
 <ion-view view-title="Country Playlist">
     <ion-content class="padding">
-
-        <h2>Vote Songs</h2>
-        <button ng-click="vote()">Vote for Song #id 1</button>
+        <div>
+            <div>
+                <h2>Vote Songs</h2>
+            </div>
+            <div>
+                {{title}}::{{artist}}
+            </div>
+            <div>
+                <button ng-click="voteUp()">Like</button>
+                <button ng-click="voteDown()">Dislike</button>
+                <button ng-click="increaseShuffle()">Shuffle</button>
+            </div>
+        </div>
 
     </ion-content>
 </ion-view>

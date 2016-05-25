@@ -17,14 +17,44 @@ angular.module('wurlitzer.controllers', [])
     })
 
     .controller('VoteSongsController', function($scope, $ionicHistory, BarApi, SelectionCache) {
-        $scope.vote = function(){
+
+        var activePlaylist = null;
+        var index = 0;
+        var playlistLength = 0;
+        var flag = true;
+        
+        BarApi.getActiveVotingList().then(function(res){
+            activePlaylist = res.data.activeVoting.future;
+            playlistLength = activePlaylist.length;
+            $scope.title = activePlaylist[index].title;
+            $scope.artist = activePlaylist[index].artist;
+        });
+
+        updateVotingSong = function () {
+            index++;
+            if(index < playlistLength) {
+                $scope.title = activePlaylist[index].title;
+                $scope.artist = activePlaylist[index].artist;
+            } else {
+                flag = false;
+                console.log("Playlist done")
+            }
+        };
+        
+        $scope.showActiveBar = function() {
+
+        };
+
+        $scope.voteUp = function(){
+            if(flag) {
             // to vote for a song, do it this way:
             // active Bar is set, so we can log in to that bar.
-            BarApi.login("test", "test").then(
-                function succ(res){
+                BarApi.login("test", "test").then(function succ(res){
                     SelectionCache.setActiveUser(res.data)
-                    BarApi.makeVoteFor(SelectionCache.getActiveUser(), { id: 1, "someotherproperties": "xyz"} , 1001)
+                    BarApi.makeVoteFor(SelectionCache.getActiveUser(), { id: activePlaylist[index].id, "someotherproperties": "xyz"} , 10)
                         .then(function success(res){
+                                console.log("update");
+                                updateVotingSong();
                             console.log(res);
                         }, function err(res){
                             console.log(res);
@@ -32,6 +62,39 @@ angular.module('wurlitzer.controllers', [])
                 },  function err(res){
                     console.log("Wrong Password or Username!");
                 })
+            }
+        }
+
+        $scope.voteDown = function(){
+            if(flag) {
+                console.log("index: ", index);
+                // to vote for a song, do it this way:
+                // active Bar is set, so we can log in to that bar.
+                BarApi.login("test", "test").then(
+                    function succ(res){
+                        SelectionCache.setActiveUser(res.data)
+                        BarApi.makeVoteFor(SelectionCache.getActiveUser(), { id: activePlaylist[index].id, "someotherproperties": "xyz"} , -10)
+                            .then(function success(res){
+                                updateVotingSong();
+                                console.log(res);
+                            }, function err(res){
+                                console.log(res);
+                            })
+                    },  function err(res){
+                        console.log("Wrong Password or Username!");
+                    })
+            }
+
+        }
+        
+        $scope.increaseShuffle = function(){
+            BarApi.increaseShuffleVote().then(function success(res){
+                if(res.data === 0){
+                    //TODO: ALERTALERTALERT show the user that the playlist has changed.
+                    console.log("Playlist changed")
+                }
+                console.log(res.data);
+            })
         }
     })
 

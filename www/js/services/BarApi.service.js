@@ -21,7 +21,7 @@ app.factory('BarApi', function($http, $log, SelectionCache) {
      * Log the user into the active Bar
      * @param username
      * @param password
-     * @returns {HttpPromise}
+     * @returns {HttpPromise} user
      * @private
      */
     function _login(username, password){
@@ -37,6 +37,16 @@ app.factory('BarApi', function($http, $log, SelectionCache) {
         return $http.get(ENDPOINT + "/" + bar.id + "/active")
     }
 
+    /**
+     * Increases the shuffle counter of the active playlist by 1
+     * If the counter > maxShuffleVotes, it will switch to another playlist
+     * Returns the current state of the counter (number)
+     * @returns {HttpPromise}
+     * @private
+     */
+    function _increaseVoteForShuffle() {
+        return $http.post(ENDPOINT + "/" + bar.id + "/active/inc")
+    }
     /**
      * Make a vote for a song in the activeVote.future list
      * @param user the user who makes the vote
@@ -57,6 +67,7 @@ app.factory('BarApi', function($http, $log, SelectionCache) {
         'getBar': _getBar,
         'getActiveVotingList': _getActiveVotingList,
         'makeVoteFor': _makeVoteFor,
+        'increaseShuffleVote': _increaseVoteForShuffle,
         'login': _login
     }
 })
