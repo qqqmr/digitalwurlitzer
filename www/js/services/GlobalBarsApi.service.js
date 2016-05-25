@@ -15,4 +15,17 @@ app.factory('GlobalBarsApi', function($http, $log) {
     return {
         'getAllBars': _getAllBars
     }
+
+    /*function getBarById(id)
+    {
+        alert("ok");
+        var json = JSON.parse(_getAllBars());
+        $.each(JSON.parse(json), function (idx, obj) {
+            if (obj.id == id) {
+                return obj;
+            }
+        });
+        return null;
+    }*/
+
 })
