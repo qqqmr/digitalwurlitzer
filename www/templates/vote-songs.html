@@ -8,13 +8,18 @@
                     <button class="button button-small button-energized icon-left ion-shuffle" ng-click="increaseShuffle()">Shuffle</button>
                 </div>
             </div>
-            <div class="card">
-                <img ng-src="{{cover}}">
-            </div>
-            <div>
-                <b>{{title | uppercase}}</b><br>
-                by<br>
-                <b>{{artist | uppercase}}</b>
+            <div class="list card">
+                <div>
+                    <br>
+                </div>
+                <div>
+                    <img ng-src="{{cover}}">
+                </div>
+                <div>
+                    <b>{{title | uppercase}}</b><br>
+                    by<br>
+                    <b>{{artist | uppercase}}</b>
+                </div>
             </div>
             <div>
                 <br>
@@ -24,6 +29,7 @@
                 <button class="button button-large button-assertive icon-left ion-arrow-down-c" ng-click="voteDown()">Dislike</button>
             </div>
         </div>
+
 
     </ion-content>
 </ion-view>
