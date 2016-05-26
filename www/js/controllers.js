@@ -24,19 +24,21 @@ angular.module('wurlitzer.controllers', [])
         var flag = true;
         
         BarApi.getActiveVotingList().then(function(res){
-            activePlaylist = res.data.activeVoting.future;
-            playlistLength = activePlaylist.length;
-            $scope.title = activePlaylist[index].title;
-            $scope.artist = activePlaylist[index].artist;
-            $scope.cover = activePlaylist[index].img_url;
+            activePlaylist = res.data.activeVoting;
+            playlistLength = activePlaylist.future.length;
+            $scope.title = activePlaylist.future[index].title;
+            $scope.artist = activePlaylist.future[index].artist;
+            $scope.cover = activePlaylist.future[index].img_url;
+            $scope.playlistName = activePlaylist.name;
+
         });
 
         updateVotingSong = function () {
             index++;
             if(index < playlistLength) {
-                $scope.title = activePlaylist[index].title;
-                $scope.artist = activePlaylist[index].artist;
-                $scope.cover = activePlaylist[index].img_url;
+                $scope.title = activePlaylist.future[index].title;
+                $scope.artist = activePlaylist.future[index].artist;
+                $scope.cover = activePlaylist.future[index].img_url;
             } else {
                 flag = false;
                 console.log("Playlist done")
@@ -53,7 +55,7 @@ angular.module('wurlitzer.controllers', [])
             // active Bar is set, so we can log in to that bar.
                 BarApi.login("test", "test").then(function succ(res){
                     SelectionCache.setActiveUser(res.data)
-                    BarApi.makeVoteFor(SelectionCache.getActiveUser(), { id: activePlaylist[index].id, "someotherproperties": "xyz"} , 10)
+                    BarApi.makeVoteFor(SelectionCache.getActiveUser(), { id: activePlaylist.future[index].id, "someotherproperties": "xyz"} , 10)
                         .then(function success(res){
                                 updateVotingSong();
                             console.log(res);
@@ -74,7 +76,7 @@ angular.module('wurlitzer.controllers', [])
                 BarApi.login("test", "test").then(
                     function succ(res){
                         SelectionCache.setActiveUser(res.data)
-                        BarApi.makeVoteFor(SelectionCache.getActiveUser(), { id: activePlaylist[index].id, "someotherproperties": "xyz"} , -10)
+                        BarApi.makeVoteFor(SelectionCache.getActiveUser(), { id: activePlaylist.future[index].id, "someotherproperties": "xyz"} , -10)
                             .then(function success(res){
                                 updateVotingSong();
                                 console.log(res);

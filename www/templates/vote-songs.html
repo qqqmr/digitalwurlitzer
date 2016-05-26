@@ -1,19 +1,27 @@
-<ion-view view-title="Country Playlist">
+<ion-view view-title="Vote">
     <ion-content class="padding">
         <div align="center">
             <div>
-                <h2>Vote Songs</h2>
+                Playlist:
+                <h2>{{playlistName}}</h2>
+                <div align="right">
+                    <button class="button button-small button-energized icon-left ion-shuffle" ng-click="increaseShuffle()">Shuffle</button>
+                </div>
             </div>
-            <div>
+            <div class="card">
                 <img ng-src="{{cover}}">
             </div>
             <div>
-                {{title}}::{{artist}}
+                <b>{{title | uppercase}}</b><br>
+                by<br>
+                <b>{{artist | uppercase}}</b>
             </div>
             <div>
-                <button ng-click="voteUp()">Like</button>
-                <button ng-click="voteDown()">Dislike</button>
-                <button ng-click="increaseShuffle()">Shuffle</button>
+                <br>
+            </div>
+            <div>
+                <button class="button button-large button-balanced icon-left ion-arrow-up-c" ng-click="voteUp()">Like</button>
+                <button class="button button-large button-assertive icon-left ion-arrow-down-c" ng-click="voteDown()">Dislike</button>
             </div>
         </div>
 
