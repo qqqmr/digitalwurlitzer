@@ -28,6 +28,7 @@ angular.module('wurlitzer.controllers', [])
             playlistLength = activePlaylist.length;
             $scope.title = activePlaylist[index].title;
             $scope.artist = activePlaylist[index].artist;
+            $scope.cover = activePlaylist[index].img_url;
         });
 
         updateVotingSong = function () {
@@ -35,6 +36,7 @@ angular.module('wurlitzer.controllers', [])
             if(index < playlistLength) {
                 $scope.title = activePlaylist[index].title;
                 $scope.artist = activePlaylist[index].artist;
+                $scope.cover = activePlaylist[index].img_url;
             } else {
                 flag = false;
                 console.log("Playlist done")
@@ -53,7 +55,6 @@ angular.module('wurlitzer.controllers', [])
                     SelectionCache.setActiveUser(res.data)
                     BarApi.makeVoteFor(SelectionCache.getActiveUser(), { id: activePlaylist[index].id, "someotherproperties": "xyz"} , 10)
                         .then(function success(res){
-                                console.log("update");
                                 updateVotingSong();
                             console.log(res);
                         }, function err(res){
