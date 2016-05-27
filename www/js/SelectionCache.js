@@ -6,6 +6,7 @@ app.factory('SelectionCache', function(){
     var activeBar = {};
     var activeUser = {};
     var lastVotedSongIndex = 0;
+    var playlistNotDone = true;
 
     return {
         setActiveBar: function(bar){
@@ -25,6 +26,12 @@ app.factory('SelectionCache', function(){
         },
         getLastVotedSongIndex: function () {
             return lastVotedSongIndex;
+        },
+        setplaylistNotDone: function(playlistNotDoneFlag) {
+            playlistNotDone = playlistNotDoneFlag;
+        },
+        getplaylistDone: function() {
+            return playlistNotDone;
         }
     }
     }

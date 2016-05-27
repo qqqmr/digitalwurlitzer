@@ -21,18 +21,20 @@ angular.module('wurlitzer.controllers', [])
         var activePlaylist = null;
         var index = SelectionCache.getLastVotedSongIndex();
         var playlistLength = 0;
-        var flag = true;
-        $scope.flag = flag;
-        
-        BarApi.getActiveVotingList().then(function(res){
-            activePlaylist = res.data.activeVoting;
-            playlistLength = activePlaylist.future.length;
-            $scope.title = activePlaylist.future[index].title;
-            $scope.artist = activePlaylist.future[index].artist;
-            $scope.cover = activePlaylist.future[index].img_url;
-            $scope.playlistName = activePlaylist.name;
+        var playlistNotDoneFlag = SelectionCache.getplaylistDone();
+        $scope.playlistNotDoneFlag = playlistNotDoneFlag;
 
-        });
+        if(playlistNotDoneFlag) {
+            BarApi.getActiveVotingList().then(function (res) {
+                activePlaylist = res.data.activeVoting;
+                playlistLength = activePlaylist.future.length;
+                $scope.title = activePlaylist.future[index].title;
+                $scope.artist = activePlaylist.future[index].artist;
+                $scope.cover = activePlaylist.future[index].img_url;
+                $scope.playlistName = activePlaylist.name;
+
+            });
+        }
 
         updateVotingSong = function () {
             index++;
@@ -42,8 +44,9 @@ angular.module('wurlitzer.controllers', [])
                 $scope.artist = activePlaylist.future[index].artist;
                 $scope.cover = activePlaylist.future[index].img_url;
             } else {
-                flag = false;
-                $scope.flag = flag;
+                playlistNotDoneFlag = false;
+                $scope.playlistNotDoneFlag = playlistNotDoneFlag;
+                SelectionCache.setplaylistNotDone(playlistNotDoneFlag);
                 console.log("Playlist done")
             }
         };
@@ -53,7 +56,7 @@ angular.module('wurlitzer.controllers', [])
         };
 
         $scope.voteUp = function(){
-            if(flag) {
+            if(playlistNotDoneFlag) {
             // to vote for a song, do it this way:
                 BarApi.makeVoteFor(SelectionCache.getActiveUser(), { id: activePlaylist.future[index].id, "someotherproperties": "xyz"} , 10)
                     .then(function success(res){
@@ -67,7 +70,7 @@ angular.module('wurlitzer.controllers', [])
 
 
         $scope.voteDown = function(){
-            if(flag) {
+            if(playlistNotDoneFlag) {
                 console.log("index: ", index);
                 // to vote for a song, do it this way:
                 BarApi.makeVoteFor(SelectionCache.getActiveUser(), { id: activePlaylist.future[index].id, "someotherproperties": "xyz"} , -10)
@@ -85,7 +88,9 @@ angular.module('wurlitzer.controllers', [])
             BarApi.increaseShuffleVote().then(function success(res){
                 if(res.data === 0){
                     SelectionCache.setLastVotedSongIndex(0);
+                    SelectionCache.setplaylistNotDone(true);
                     index = SelectionCache.getLastVotedSongIndex();
+                    playlistNotDoneFlag = SelectionCache.getplaylistDone();
                     playlistLength = 0;
 
                     activePlaylist = null;
@@ -98,8 +103,7 @@ angular.module('wurlitzer.controllers', [])
                         $scope.cover = activePlaylist.future[index].img_url;
                         $scope.playlistName = activePlaylist.name;
 
-                        flag = true;
-                        $scope.flag = flag;
+                        $scope.playlistNotDoneFlag = playlistNotDoneFlag;
 
                     });
                     

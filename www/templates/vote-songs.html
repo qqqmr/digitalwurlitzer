@@ -8,7 +8,7 @@
                     <button class="button button-small button-energized icon-left ion-shuffle" ng-click="increaseShuffle()">Shuffle</button>
                 </div>
             </div >
-            <div ng-show="flag">
+            <div ng-show="playlistNotDoneFlag">
                 <div class="list card" on-swipe-right="voteUp()" on-swipe-left="voteDown()">
                     <div>
                         <br>
@@ -26,12 +26,12 @@
                     <br>
                 </div>
                 <div>
-                    <button class="button button-large button-balanced icon-left ion-arrow-up-c" ng-click="voteUp()">Like</button>
+                    <button class="button button-large button-balanced icon-left ion-arrow-up-c" ng-click="voteUp()">&nbsp;Like&nbsp;&nbsp;</button>
                     <button class="button button-large button-assertive icon-left ion-arrow-down-c" ng-click="voteDown()">Dislike</button>
                 </div>
             </div>
-            <div align="center" ng-hide="flag">
-                    <b>Playlist leer, bitte refresh drücken!</b>
+            <div align="center" ng-hide="playlistNotDoneFlag">
+                    <b>Playlist leer, bitte Shuffle drücken!</b>
             </div>
         </div>
 
