@@ -7,26 +7,31 @@
                 <div align="right">
                     <button class="button button-small button-energized icon-left ion-shuffle" ng-click="increaseShuffle()">Shuffle</button>
                 </div>
-            </div>
-            <div class="list card" on-swipe-right="voteUp()" on-swipe-left="voteDown()">
+            </div >
+            <div ng-show="flag">
+                <div class="list card" on-swipe-right="voteUp()" on-swipe-left="voteDown()">
+                    <div>
+                        <br>
+                    </div>
+                    <div>
+                        <img ng-src="{{cover}}">
+                    </div>
+                    <div>
+                        <b>{{title | uppercase}}</b><br>
+                        by<br>
+                        <b>{{artist | uppercase}}</b>
+                    </div>
+                </div>
                 <div>
                     <br>
                 </div>
                 <div>
-                    <img ng-src="{{cover}}">
-                </div>
-                <div>
-                    <b>{{title | uppercase}}</b><br>
-                    by<br>
-                    <b>{{artist | uppercase}}</b>
+                    <button class="button button-large button-balanced icon-left ion-arrow-up-c" ng-click="voteUp()">Like</button>
+                    <button class="button button-large button-assertive icon-left ion-arrow-down-c" ng-click="voteDown()">Dislike</button>
                 </div>
             </div>
-            <div>
-                <br>
-            </div>
-            <div>
-                <button class="button button-large button-balanced icon-left ion-arrow-up-c" ng-click="voteUp()">Like</button>
-                <button class="button button-large button-assertive icon-left ion-arrow-down-c" ng-click="voteDown()">Dislike</button>
+            <div align="center" ng-hide="flag">
+                    <b>Playlist leer, bitte refresh drücken!</b>
             </div>
         </div>
 
