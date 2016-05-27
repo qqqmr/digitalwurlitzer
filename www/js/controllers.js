@@ -87,7 +87,8 @@ angular.module('wurlitzer.controllers', [])
                     SelectionCache.setLastVotedSongIndex(0);
                     index = SelectionCache.getLastVotedSongIndex();
                     playlistLength = 0;
-                    flag = true;
+
+                    activePlaylist = null;
 
                     BarApi.getActiveVotingList().then(function(res){
                         activePlaylist = res.data.activeVoting;
@@ -96,6 +97,9 @@ angular.module('wurlitzer.controllers', [])
                         $scope.artist = activePlaylist.future[index].artist;
                         $scope.cover = activePlaylist.future[index].img_url;
                         $scope.playlistName = activePlaylist.name;
+
+                        flag = true;
+                        $scope.flag = flag;
 
                     });
                     
