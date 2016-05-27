@@ -77,8 +77,8 @@ app.factory('BackendData', function(){ return {
         },
         "latidude": "48.2364",
         "longitude": "16.3914",
-        "shuffleCount": 1,
-        "shuffleCountMax": 10,
+        "shuffleCount": 0,
+        "shuffleCountMax": 1,
         "id": 0,
         "playlists": [
             {
@@ -170,8 +170,8 @@ app.factory('BackendData', function(){ return {
         /* additional bar props come here. specials, etc. */
         "latidude": "48.2410",
         "longitude": "16.3668",
-        "shuffleCount": 4,
-        "shuffleCountMax": 9,
+        "shuffleCount": 0,
+        "shuffleCountMax": 1,
         "info": {
             "open": [
                 {

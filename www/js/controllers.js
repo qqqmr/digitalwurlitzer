@@ -84,8 +84,22 @@ angular.module('wurlitzer.controllers', [])
         $scope.increaseShuffle = function(){
             BarApi.increaseShuffleVote().then(function success(res){
                 if(res.data === 0){
-                    //TODO: ALERTALERTALERT show the user that the playlist has changed.
-                    console.log("Playlist changed")
+                    SelectionCache.setLastVotedSongIndex(0);
+                    index = SelectionCache.getLastVotedSongIndex();
+                    playlistLength = 0;
+                    flag = true;
+
+                    BarApi.getActiveVotingList().then(function(res){
+                        activePlaylist = res.data.activeVoting;
+                        playlistLength = activePlaylist.future.length;
+                        $scope.title = activePlaylist.future[index].title;
+                        $scope.artist = activePlaylist.future[index].artist;
+                        $scope.cover = activePlaylist.future[index].img_url;
+                        $scope.playlistName = activePlaylist.name;
+
+                    });
+                    
+                    console.log("playlist changed");
                 }
                 console.log(res.data);
             })
