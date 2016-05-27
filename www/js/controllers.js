@@ -19,7 +19,7 @@ angular.module('wurlitzer.controllers', [])
     .controller('VoteSongsController', function($scope, $ionicHistory, BarApi, SelectionCache) {
 
         var activePlaylist = null;
-        var index = 0;
+        var index = SelectionCache.getLastVotedSongIndex();
         var playlistLength = 0;
         var flag = true;
         
@@ -35,6 +35,7 @@ angular.module('wurlitzer.controllers', [])
 
         updateVotingSong = function () {
             index++;
+            SelectionCache.setLastVotedSongIndex(index);
             if(index < playlistLength) {
                 $scope.title = activePlaylist.future[index].title;
                 $scope.artist = activePlaylist.future[index].artist;

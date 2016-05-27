@@ -5,6 +5,7 @@ app.factory('SelectionCache', function(){
     // automatically resolved when the backend is implemented
     var activeBar = {};
     var activeUser = {};
+    var lastVotedSongIndex = 0;
 
     return {
         setActiveBar: function(bar){
@@ -18,6 +19,12 @@ app.factory('SelectionCache', function(){
         },
         getActiveUser: function(){
             return activeUser;
+        },
+        setLastVotedSongIndex: function (index) {
+            lastVotedSongIndex = index;
+        },
+        getLastVotedSongIndex: function () {
+            return lastVotedSongIndex;
         }
     }
     }
