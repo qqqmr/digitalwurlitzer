@@ -138,7 +138,6 @@ angular.module('wurlitzer.controllers', [])
 
 
         $scope.login = function() {
-            console.log("try login");
             BarApi.login("test", "test").then(
                 function succ(res) {
                     SelectionCache.setActiveUser(res.data)

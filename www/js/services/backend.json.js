@@ -29,17 +29,17 @@ app.factory('BackendData', function(){ return {
         "info": {
             "open": [
                 {
-                    "day": "Montag",
-                    "from": "geschlossen",
-                    "to": "geschlossen"
+                    "day": "Monday",
+                    "from": "closed",
+                    "to": "closed"
                 },
                 {
-                    "day": "Dienstag-Freitag",
+                    "day": "Tuesday-Friday",
                     "from": "16:00",
                     "to": "00:00"
                 },
                 {
-                    "day": "Samstag-Sonntag",
+                    "day": "Saturday-Sunday",
                     "from": "18:00",
                     "to": "04:00"
                 }
@@ -118,19 +118,19 @@ app.factory('BackendData', function(){ return {
         "info": {
             "open": [
                 {
-                    "day": "Montag-Donnerstag",
+                    "day": "Monday-Thursday",
                     "from": "12:00",
                     "to": "10:00"
                 },
                 {
-                    "day": "Freitag-Samstag",
+                    "day": "Friday-Saturday",
                     "from": "16:00",
                     "to": "03:00"
                 },
                 {
-                    "day": "Sonntag",
-                    "from": "geschlossen",
-                    "to": "geschlossen"
+                    "day": "Sunday",
+                    "from": "closed",
+                    "to": "closed"
                 }
             ],
             "special_drinks": [
@@ -175,17 +175,17 @@ app.factory('BackendData', function(){ return {
         "info": {
             "open": [
                 {
-                    "day": "Montag",
+                    "day": "Monday",
                     "from": "15:00",
                     "to": "23:00"
                 },
                 {
-                    "day": "Dienstag-Freitag",
+                    "day": "Tuesday-Friday",
                     "from": "17:00",
                     "to": "01:00"
                 },
                 {
-                    "day": "Samstag-Sonntag",
+                    "day": "Saturday-Sunday",
                     "from": "18:00",
                     "to": "05:00"
                 }
