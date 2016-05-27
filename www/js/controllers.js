@@ -1,6 +1,6 @@
 angular.module('wurlitzer.controllers', [])
 
-    .controller('MainMenuController', function($scope, $location) {
+    .controller('MainMenuController', function($scope, $location, SelectionCache) {
 
         $scope.show_playlist = function ( path ) {
             $location.url( path );
@@ -9,7 +9,7 @@ angular.module('wurlitzer.controllers', [])
             $location.url( path );
         };
         $scope.bar_info = function ( path ) {
-            $location.url( path );
+            $location.url( path + SelectionCache.getActiveBar().id);
         };
         $scope.find_bars = function ( path ) {
             $location.url( path );
@@ -52,43 +52,31 @@ angular.module('wurlitzer.controllers', [])
         $scope.voteUp = function(){
             if(flag) {
             // to vote for a song, do it this way:
-            // active Bar is set, so we can log in to that bar.
-                BarApi.login("test", "test").then(function succ(res){
-                    SelectionCache.setActiveUser(res.data)
-                    BarApi.makeVoteFor(SelectionCache.getActiveUser(), { id: activePlaylist.future[index].id, "someotherproperties": "xyz"} , 10)
-                        .then(function success(res){
-                                updateVotingSong();
-                            console.log(res);
-                        }, function err(res){
-                            console.log(res);
-                        })
-                },  function err(res){
-                    console.log("Wrong Password or Username!");
-                })
+                BarApi.makeVoteFor(SelectionCache.getActiveUser(), { id: activePlaylist.future[index].id, "someotherproperties": "xyz"} , 10)
+                    .then(function success(res){
+                        updateVotingSong();
+                        console.log(res);
+                    }, function err(res){
+                        console.log(res);
+                    })
             }
-        }
+        };
+
 
         $scope.voteDown = function(){
             if(flag) {
                 console.log("index: ", index);
                 // to vote for a song, do it this way:
-                // active Bar is set, so we can log in to that bar.
-                BarApi.login("test", "test").then(
-                    function succ(res){
-                        SelectionCache.setActiveUser(res.data)
-                        BarApi.makeVoteFor(SelectionCache.getActiveUser(), { id: activePlaylist.future[index].id, "someotherproperties": "xyz"} , -10)
-                            .then(function success(res){
-                                updateVotingSong();
-                                console.log(res);
-                            }, function err(res){
-                                console.log(res);
-                            })
-                    },  function err(res){
-                        console.log("Wrong Password or Username!");
+                BarApi.makeVoteFor(SelectionCache.getActiveUser(), { id: activePlaylist.future[index].id, "someotherproperties": "xyz"} , -10)
+                    .then(function success(res){
+                        updateVotingSong();
+                        console.log(res);
+                    }, function err(res){
+                        console.log(res);
                     })
             }
 
-        }
+        };
         
         $scope.increaseShuffle = function(){
             BarApi.increaseShuffleVote().then(function success(res){
@@ -101,17 +89,42 @@ angular.module('wurlitzer.controllers', [])
         }
     })
 
-    .controller('BarInfoController', function($scope, $ionicHistory, BarApi) {
-        
-        //TODO: set selection cache instead of hard coded id
-        BarApi.getBar(0).then(function(res){
+    .controller('BarInfoController', function($scope, $stateParams, $ionicHistory, BarApi, GlobalBarsApi, $location, SelectionCache) {
 
-            console.log("res: ", res);
-            $scope.name = res.data.name;
-            $scope.events = res.data.info.events;
-            $scope.special_drinks = res.data.info.special_drinks;
-            $scope.openHours = res.data.info.open;
-        });
+        if(_.isEmpty(SelectionCache.getActiveBar())) {
+            GlobalBarsApi.getAllBars().then(function(res){
+                SelectionCache.setActiveBar(res.data[$stateParams.barId]);
+
+                $scope.name = SelectionCache.getActiveBar().name;
+                $scope.events = SelectionCache.getActiveBar().info.events;
+                $scope.special_drinks = SelectionCache.getActiveBar().info.special_drinks;
+                $scope.openHours = SelectionCache.getActiveBar().info.open;
+            });
+
+        } else {
+            BarApi.getBar(SelectionCache.getActiveBar().id).then(function(res) {
+                $scope.name = res.data.name;
+                $scope.events = res.data.info.events;
+                $scope.special_drinks = res.data.info.special_drinks;
+                $scope.openHours = res.data.info.open;
+            });
+        }
+
+
+
+        $scope.login = function() {
+            console.log("try login");
+            BarApi.login("test", "test").then(
+                function succ(res) {
+                    SelectionCache.setActiveUser(res.data)
+                    $location.url("/main-menu")
+                },
+                function err(err) {
+                    console.log("error login: ", err);
+                }
+            )
+        };
+
 
     })
 

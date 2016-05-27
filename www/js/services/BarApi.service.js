@@ -14,6 +14,7 @@ app.factory('BarApi', function($http, $log, SelectionCache) {
     var bar = SelectionCache.getActiveBar();
 
     function _getBar(id){
+        bar = SelectionCache.getActiveBar();
         return $http.get(ENDPOINT + "/" + bar.id)
     }
 
@@ -25,6 +26,7 @@ app.factory('BarApi', function($http, $log, SelectionCache) {
      * @private
      */
     function _login(username, password){
+        bar = SelectionCache.getActiveBar();
         return $http.post(ENDPOINT + "/" + bar.id + "/login", {"username": username, "password": password})
     }
 
@@ -34,6 +36,7 @@ app.factory('BarApi', function($http, $log, SelectionCache) {
      * @private
      */
     function _getActiveVotingList() {
+        bar = SelectionCache.getActiveBar();
         return $http.get(ENDPOINT + "/" + bar.id + "/active")
     }
 
@@ -45,6 +48,7 @@ app.factory('BarApi', function($http, $log, SelectionCache) {
      * @private
      */
     function _increaseVoteForShuffle() {
+        bar = SelectionCache.getActiveBar();
         return $http.post(ENDPOINT + "/" + bar.id + "/active/inc")
     }
     /**
@@ -55,6 +59,7 @@ app.factory('BarApi', function($http, $log, SelectionCache) {
      * @private
      */
     function _makeVoteFor(user, song, points) {
+        bar = SelectionCache.getActiveBar();
         var data = {
             "user": user,
             "song": song,
