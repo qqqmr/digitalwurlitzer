@@ -122,6 +122,9 @@ angular.module('wurlitzer.controllers', [])
             GlobalBarsApi.getAllBars().then(function(res){
                 SelectionCache.setSelectedBar(res.data[$stateParams.barId]);
 
+                if($stateParams.barId != 0)
+                    $scope.loggedIn = true;
+                
                 $scope.name = SelectionCache.getSelectedBar().name;
                 $scope.events = SelectionCache.getSelectedBar().info.events;
                 $scope.special_drinks = SelectionCache.getSelectedBar().info.special_drinks;
