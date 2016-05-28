@@ -115,20 +115,22 @@ angular.module('wurlitzer.controllers', [])
     })
 
     .controller('BarInfoController', function($scope, $stateParams, $ionicHistory, BarApi, GlobalBarsApi, $location, SelectionCache) {
-
+        
         if(_.isEmpty(SelectionCache.getActiveBar())) {
             $scope.loggedIn = false;
+            
             GlobalBarsApi.getAllBars().then(function(res){
-                SelectionCache.setActiveBar(res.data[$stateParams.barId]);
+                SelectionCache.setSelectedBar(res.data[$stateParams.barId]);
 
-                $scope.name = SelectionCache.getActiveBar().name;
-                $scope.events = SelectionCache.getActiveBar().info.events;
-                $scope.special_drinks = SelectionCache.getActiveBar().info.special_drinks;
-                $scope.openHours = SelectionCache.getActiveBar().info.open;
+                $scope.name = SelectionCache.getSelectedBar().name;
+                $scope.events = SelectionCache.getSelectedBar().info.events;
+                $scope.special_drinks = SelectionCache.getSelectedBar().info.special_drinks;
+                $scope.openHours = SelectionCache.getSelectedBar().info.open;
             });
 
         } else {
             $scope.loggedIn = true;
+            
             BarApi.getBar(SelectionCache.getActiveBar().id).then(function(res) {
                 $scope.name = res.data.name;
                 $scope.events = res.data.info.events;
@@ -140,6 +142,7 @@ angular.module('wurlitzer.controllers', [])
 
 
         $scope.login = function() {
+            SelectionCache.setActiveBar(SelectionCache.getSelectedBar());
             BarApi.login("test", "test").then(
                 function succ(res) {
                     SelectionCache.setActiveUser(res.data)
@@ -156,9 +159,8 @@ angular.module('wurlitzer.controllers', [])
 
     .controller('FindBarsController', function($scope, $ionicHistory, GlobalBarsApi, SelectionCache, $ionicLoading, $compile, $http, $location) {
 
-        // Set SelectionCache.activeBar()
-        console.log("findbars");
-        SelectionCache.setActiveBar(null);
+        // Set active bar empty so user has to log in again if he is in find bars view
+        SelectionCache.setActiveBar({});
 
         //init map
         initialize();

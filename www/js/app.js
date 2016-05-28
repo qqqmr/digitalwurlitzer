@@ -62,10 +62,10 @@ angular.module('starter', ['ionic', 'wurlitzer.controllers', 'ngMockE2E'])
       $urlRouterProvider.otherwise('/find-bars');
     })
 
-    .controller('NavBarController', function($scope, $ionicHistory, $location) {
+    .controller('NavBarController', function($scope, $ionicHistory, $location, SelectionCache) {
       $scope.goBack = function() {
           
-        if($ionicHistory.currentStateName() === "bar-info")
+        if($ionicHistory.currentStateName() === "bar-info" && !_.isEmpty(SelectionCache.getActiveBar()))
             $location.url("/main-menu");
         else  
             $ionicHistory.goBack();
