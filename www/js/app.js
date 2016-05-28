@@ -33,6 +33,7 @@ angular.module('starter', ['ionic', 'wurlitzer.controllers', 'ngMockE2E'])
           })
 
           .state('bar-info', {
+            cache: false,
             url: '/bar-info/:barId',
             templateUrl: '/templates/bar-info.html',
             controller: 'BarInfoController'
@@ -45,6 +46,7 @@ angular.module('starter', ['ionic', 'wurlitzer.controllers', 'ngMockE2E'])
           })
 
           .state('find-bars', {
+            cache: false,
             url: '/find-bars',
             templateUrl: '/templates/find-bars.html',
             controller: 'FindBarsController'
@@ -60,8 +62,12 @@ angular.module('starter', ['ionic', 'wurlitzer.controllers', 'ngMockE2E'])
       $urlRouterProvider.otherwise('/find-bars');
     })
 
-    .controller('NavBarController', function($scope, $ionicHistory, GlobalBarsApi, SelectionCache) {
+    .controller('NavBarController', function($scope, $ionicHistory, $location) {
       $scope.goBack = function() {
-        $ionicHistory.goBack();
+          
+        if($ionicHistory.currentStateName() === "bar-info")
+            $location.url("/main-menu");
+        else  
+            $ionicHistory.goBack();
       };
     });

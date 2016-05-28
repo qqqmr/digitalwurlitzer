@@ -117,6 +117,7 @@ angular.module('wurlitzer.controllers', [])
     .controller('BarInfoController', function($scope, $stateParams, $ionicHistory, BarApi, GlobalBarsApi, $location, SelectionCache) {
 
         if(_.isEmpty(SelectionCache.getActiveBar())) {
+            $scope.loggedIn = false;
             GlobalBarsApi.getAllBars().then(function(res){
                 SelectionCache.setActiveBar(res.data[$stateParams.barId]);
 
@@ -127,6 +128,7 @@ angular.module('wurlitzer.controllers', [])
             });
 
         } else {
+            $scope.loggedIn = true;
             BarApi.getBar(SelectionCache.getActiveBar().id).then(function(res) {
                 $scope.name = res.data.name;
                 $scope.events = res.data.info.events;
@@ -153,6 +155,10 @@ angular.module('wurlitzer.controllers', [])
     })
 
     .controller('FindBarsController', function($scope, $ionicHistory, GlobalBarsApi, SelectionCache, $ionicLoading, $compile, $http, $location) {
+
+        // Set SelectionCache.activeBar()
+        console.log("findbars");
+        SelectionCache.setActiveBar(null);
 
         //init map
         initialize();

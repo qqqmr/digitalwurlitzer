@@ -4,7 +4,7 @@
 
 
         <h3 align="center">Bar Info - {{name}}</h3>
-        <div>
+        <div ng-show="!loggedIn">
             <button style="width: 100%;" class="button button-balanced" ng-click="login()">
                 Login
             </button>
