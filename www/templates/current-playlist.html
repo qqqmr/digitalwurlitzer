@@ -1,14 +1,27 @@
 <ion-view view-title="Playlist {{currentPlaylist.name}}">
   <ion-content class="padding">
-    Vergangen:
-    <div ng-repeat="song in currentPlaylist.history">
-      {{song.artist}}::{{song.title}}
+    <div class="list">
+      <div class="item item-divider history-bg">
+        Past:
+      </div>
+      <a class="item item-avatar" href="#" ng-repeat="song in currentPlaylist.history| limitTo:3 | filter:!currentSong">
+        <h2>{{song.artist}}</h2>
+        <p>{{song.title}}</p>
+      </a>
+      <div class="item item-divider current-song-bg">
+        Current Song:
+      </div>
+      <a class="item item-avatar" href="#" ng-repeat="song in currentPlaylist.history| filter:currentSong">
+        <h2>{{song.artist}}</h2>
+        <p>{{song.title}}</p>
+      </a>
+      <div class="item item-divider">
+        Left for Voting:
+      </div>
+      <a class="item item-avatar" href="#" ng-repeat="song in currentPlaylist.future|orderBy: index|limitTo:7">
+        <h2>{{song.artist}}</h2>
+        <p>{{song.title}}</p>
+      </a>
     </div>
-
-    Ausstehend:
-    <div ng-repeat="song in currentPlaylist.future">
-      {{song.artist}}::{{song.title}}
-    </div>
-
   </ion-content>
 </ion-view>

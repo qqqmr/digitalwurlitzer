@@ -15,9 +15,63 @@ $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
 
+
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Include all of Ionic
-@import "www/lib/ionic/scss/ionic";
+@import "../www/lib/ionic/scss/ionic";
+
+
+
+/*## find-bars map view ##*/
+#map {
+  width: 100%;
+  height: 100%;
+}
+
+.scroll {
+  height: 100%;
+}
+
+
+/*## end find-bars map view ##*/
+
+table, th , td {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+
+div.header {
+  background-color: #3498db;
+  color:white;
+  text-align:center;
+  padding:5px;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.history-bg {
+  color: $dark;
+  background : $calm
+}
+
+.current-song-bg {
+  background: $energized;
+  color: $dark;
+}
+
+.big-button {
+  @extend button;
+  height: 7em;
+  width: 100%;
+}
+
 

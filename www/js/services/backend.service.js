@@ -107,6 +107,10 @@ app.run(function($httpBackend, BackendData, $log, $window) {
         Bar.activeVoting.history[0].currentSong = true;
 
         Bar.activeVoting.future = _.tail(newSongList);
+        //delete old votes!
+        _.forEach(Bar.activeVoting.future, function(song){
+           song.votes = [];
+        })
 
         return [200, 0]; // return 0 means: PLAYLIST GOT SHUFFLED!
     });
