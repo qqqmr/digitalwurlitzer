@@ -14,6 +14,7 @@ app.factory('BackendData', function(){ return {
                 
                 "power": 1.1    // just a proposal: the actual points for the vote could be power*(+/-1000)
                                 // depending on how many likes/dislikes this user collected.
+                                // DEPRECATED: since meeting 26.05.16
             },
             {
                 "id": 1,
