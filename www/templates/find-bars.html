@@ -1,8 +1,8 @@
 <ion-view hide-back-button="true" view-title="Find Bars">
-    <ion-content class="padding">
+    <ion-content class="padding" scroll="false">
 
+  <!--TODO search location/bar to center map on-->
 
-        <!--TODO search location/bar to center map on-->
         <label class="item item-input">
             <i class="icon ion-search placeholder-icon"></i>
             <form ng-submit="searchCity()">
@@ -11,9 +11,7 @@
                 <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;"/>
             </form>
         </label>
-
-
-        <div id="map" data-tap-disabled="true"></div>
+        <div id="map" data-tap-disabled="true" style="height: 92%"></div>
 
 
 
