@@ -5,10 +5,12 @@ app = angular.module('starter')
 
     BarApi.getActiveVotingList().then(function success(response) {
         $scope.currentPlaylist = response.data.activeVoting;
-        _.forEach($scope.currentPlaylist, function(song){
+        _.forEach($scope.currentPlaylist.future, function(song){
+            song.vindex = 1000;
             _.forEach(song.votes, function(vote){
-                song.index = song.index + vote;
+                song.vindex = song.vindex + vote.points;
             })
+            console.log(song.vindex)
         })
         $log.debug(response);
     }, function error(response) {

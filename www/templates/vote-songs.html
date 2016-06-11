@@ -1,11 +1,14 @@
-<ion-view view-title="Vote">
+<ion-view view-title="Vote!">
     <ion-content class="padding">
         <div align="center">
             <div>
                 Playlist:
                 <h3>{{playlistName}}</h3>
                 <div align="right">
-                    <button class="button button-small button-energized icon-left ion-shuffle" ng-click="increaseShuffle()">Change Playlist</button>
+                    <button class="button button-small button-energized icon-left ion-shuffle" ng-click="showConfirm(); increaseShuffle()">
+                        <span ng-show="voteCountLeft === null">Change Playlist</span>
+                        <span ng-show="!(voteCountLeft === null)">+{{voteCountLeft}} votes needed</span>
+                    </button>
                 </div>
             </div >
             <div ng-show="playlistNotDoneFlag">
@@ -31,7 +34,7 @@
                 </div>
             </div>
             <div align="center" ng-hide="playlistNotDoneFlag">
-                    <b>Playlist leer, bitte Shuffle drücken!</b>
+                    <b>Thanks for your votes!</b>
             </div>
         </div>
 

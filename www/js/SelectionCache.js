@@ -8,6 +8,7 @@ app.factory('SelectionCache', function(){
     var activeUser = {};
     var lastVotedSongIndex = 0;
     var playlistNotDone = true;
+    var viewHelpText = true;
 
     return {
         setActiveBar: function(bar){
@@ -39,6 +40,12 @@ app.factory('SelectionCache', function(){
         },
         getplaylistDone: function() {
             return playlistNotDone;
+        },
+        getViewHelpText: function () {
+            return viewHelpText;
+        },
+        setViewHelpText: function(flag){
+            viewHelpText = flag;
         }
     }
     }

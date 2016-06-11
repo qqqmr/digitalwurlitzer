@@ -72,7 +72,7 @@ app.run(function($httpBackend, BackendData, $log, $window) {
         var Bar = _.find(BackendData.bars, function(o) { return o.id === id; });
         if(!Bar) return [404]
         Bar.shuffleCount++;
-        if(Bar.shuffleCount < Bar.shuffleCountMax) return [200, Bar.shuffleCount];
+        if(Bar.shuffleCount < Bar.shuffleCountMax) return [200, Bar.shuffleCountMax - Bar.shuffleCount];
         Bar.shuffleCount = 0;
         
         // now take the next playlist, join songs by id props and insert it to activeVoting

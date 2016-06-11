@@ -16,13 +16,27 @@ angular.module('wurlitzer.controllers', [])
         };
     })
 
-    .controller('VoteSongsController', function($scope, $ionicHistory, BarApi, SelectionCache) {
+    .controller('VoteSongsController', function($scope, $ionicHistory, BarApi, $ionicPopup, SelectionCache) {
 
         var activePlaylist = null;
         var index = SelectionCache.getLastVotedSongIndex();
         var playlistLength = 0;
         var playlistNotDoneFlag = SelectionCache.getplaylistDone();
         $scope.playlistNotDoneFlag = playlistNotDoneFlag;
+        $scope.voteCountLeft = null;
+
+        // A confirm dialog
+        $scope.showConfirm = function() {
+            if(!SelectionCache.getViewHelpText()) return;
+            var confirmPopup = $ionicPopup.alert({
+                title: 'What?',
+                template: 'By clicking this button, you can vote for a playlist change. Of course: ' +
+                'You need more people to do that. Spread the word!'
+            });
+            confirmPopup.then(function(res) {
+                SelectionCache.setViewHelpText(false)
+            });
+        }
 
         if(playlistNotDoneFlag) {
             BarApi.getActiveVotingList().then(function (res) {
@@ -84,9 +98,11 @@ angular.module('wurlitzer.controllers', [])
 
         };
         
+        
         $scope.increaseShuffle = function(){
             BarApi.increaseShuffleVote().then(function success(res){
-                if(res.data === 0){
+                $scope.voteCountLeft = res.data;
+                if($scope.voteCountLeft === 0){
                     SelectionCache.setLastVotedSongIndex(0);
                     SelectionCache.setplaylistNotDone(true);
                     index = SelectionCache.getLastVotedSongIndex();
@@ -104,7 +120,7 @@ angular.module('wurlitzer.controllers', [])
                         $scope.playlistName = activePlaylist.name;
 
                         $scope.playlistNotDoneFlag = playlistNotDoneFlag;
-
+                        $scope.voteCountLeft = null;
                     });
                     
                     console.log("playlist changed");
@@ -121,9 +137,11 @@ angular.module('wurlitzer.controllers', [])
             
             GlobalBarsApi.getAllBars().then(function(res){
                 SelectionCache.setSelectedBar(res.data[$stateParams.barId]);
-
-                if($stateParams.barId != 0)
-                    $scope.loggedIn = true;
+                $scope.amIhere = true;
+                if($stateParams.barId != 0){
+                    //$scope.loggedIn = true;
+                    $scope.amIhere = false;
+                }
                 
                 $scope.name = SelectionCache.getSelectedBar().name;
                 $scope.events = SelectionCache.getSelectedBar().info.events;

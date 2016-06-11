@@ -4,21 +4,21 @@
       <div class="item item-divider history-bg">
         Past:
       </div>
-      <a class="item item-avatar" href="#" ng-repeat="song in currentPlaylist.history| limitTo:3 | filter:!currentSong">
+      <a class="item item-avatar" href="#" ng-repeat="song in currentPlaylist.history| limitTo:3 | filter: {currentSong: 'false'}">
         <h2>{{song.artist}}</h2>
         <p>{{song.title}}</p>
       </a>
       <div class="item item-divider current-song-bg">
         Current Song:
       </div>
-      <a class="item item-avatar" href="#" ng-repeat="song in currentPlaylist.history| filter:currentSong">
+      <a class="item item-avatar" href="#" ng-repeat="song in currentPlaylist.history| filter: {currentSong: 'true'}">
         <h2>{{song.artist}}</h2>
         <p>{{song.title}}</p>
       </a>
       <div class="item item-divider">
         Left for Voting:
       </div>
-      <a class="item item-avatar" href="#" ng-repeat="song in currentPlaylist.future|orderBy: index|limitTo:7">
+      <a class="item item-avatar" href="#" ng-repeat="song in currentPlaylist.future| orderBy: '-vindex'|limitTo:7">
         <h2>{{song.artist}}</h2>
         <p>{{song.title}}</p>
       </a>

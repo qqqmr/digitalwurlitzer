@@ -79,7 +79,7 @@ app.factory('BackendData', function(){ return {
         "latidude": "48.2364",
         "longitude": "16.3914",
         "shuffleCount": 0,
-        "shuffleCountMax": 1,
+        "shuffleCountMax": 5,
         "id": 0,
         "playlists": [
             {
@@ -96,7 +96,7 @@ app.factory('BackendData', function(){ return {
         "activeVoting": {
             "playlist": 0,
             "name": "GoaPsyTrance",
-            "history":[{"title":"Creep","artist":"Radiohead","year":"1993", "currentSong": true, "web_url":"http://www.songnotes.cc/songs/36-radiohead-creep","img_url":"img/img20.jpeg","id":20,"votes":[]}],
+            "history":[{"title":"Hotel California","artist":"The Eagles","year":"1977", "currentSong": "false", "web_url":"http://www.songnotes.cc/songs/56-the-eagles-hotel-california","img_url":"http://fireflygrove.com/songnotes/images/artists/TheEagles.jpg","id":55,"votes":[]}, {"title":"Creep","artist":"Radiohead","year":"1993", "currentSong": "true", "web_url":"http://www.songnotes.cc/songs/36-radiohead-creep","img_url":"img/img20.jpeg","id":20,"votes":[]}],
             "future": [{"title":"1904","artist":"The Tallest Man on Earth","year":"2012","web_url":"http://www.songnotes.cc/songs/78-the-tallest-man-on-earth-1904","img_url":"img/img01.jpg","id":1,"votes":[]},{"title":"40oz to Freedom","artist":"Sublime","year":"1996","web_url":"http://www.songnotes.cc/songs/45-sublime-40oz-to-freedom","img_url":"img/img02.jpg","id":2,"votes":[]},{"title":"#41","artist":"Dave Matthews","year":"1996","web_url":"http://www.songnotes.cc/songs/46-dave-matthews-band-41","img_url":"img/img03.jpg","id":3,"votes":[]},{"title":"American Girl","artist":"Tom Petty","year":"1977","web_url":"http://www.songnotes.cc/songs/86-tom-petty-american-girl","img_url":"img/img04.jpg","id":4,"votes":[]},{"title":"American Music","artist":"Violent Femmes","year":"1991","web_url":"http://www.songnotes.cc/songs/123-violent-femmes-american-music","img_url":"img/img05.jpg","id":5,"votes":[]},{"title":"American Pie","artist":"Don McLean","year":"1972","web_url":"http://www.songnotes.cc/songs/132-don-mclean-american-pie","img_url":"img/img06.jpeg","id":6,"votes":[]},{"title":"And it Stoned Me","artist":"Van Morrison","year":"1970","web_url":"http://www.songnotes.cc/songs/27-van-morrison-and-it-stoned-me","img_url":"img/img07.jpeg","id":7,"votes":[]},{"title":"A Sailor's Christmas","artist":"Jimmy Buffett","year":"1996","web_url":"http://www.songnotes.cc/songs/11-jimmy-buffett-a-sailors-christmas","img_url":"img/img08.jpeg","id":8,"votes":[]},{"title":"Badfish","artist":"Sublime","year":"1996","web_url":"http://www.songnotes.cc/songs/21-sublime-badfish","img_url":"img/img09.jpeg","id":9,"votes":[]}, {"title":"Banana Pancakes","artist":"Jack Johnson","year":"2005","web_url":"http://www.songnotes.cc/songs/102-jack-johnson-banana-pancakes","img_url":"img/img10.jpeg","id":10,"votes":[]}]
             // if you vote, push an object to the vote array. { user: the user who voted, the points he invested + or -}
         }

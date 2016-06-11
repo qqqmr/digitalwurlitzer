@@ -1,13 +1,18 @@
 <ion-view view-title="Country Playlist">
-    <ion-content class="padding">
-
-
+    <ion-content class="padding"
 
         <h3 align="center">Bar Info - {{name}}</h3>
         <div ng-show="!loggedIn">
+            <div ng-show="!amIhere">
+                <button style="width: 100%;" class="button button-assertive">
+                    No Login! You are not here yet!
+                </button>
+            </div>
+            <div ng-show="amIhere">
             <button style="width: 100%;" class="button button-balanced" ng-click="login()">
                 Login
             </button>
+            </div>
         </div>
         <div class="header">Open Hours</div>
         <table width="100%">
